@@ -1,6 +1,7 @@
 import argparse
-from .parser import parse_log
-from analyzer import analyze
+from log_analyzer.parser import parse_log
+from log_analyzer.analyzer import analyze
+from log_analyzer.report import cli_report, save_to_csv
 
 
 def main():
@@ -22,7 +23,11 @@ def main():
 
     records = parse_log(args.file)
     sorted_stats = analyze(records)
+    cli_report(sorted_stats)
 
+    if args.out:
+        save_to_csv(sorted_stats, args.out)
+        print(f"\nReport saved to {args.out}")
 
 if __name__ == "__main__":
     main()

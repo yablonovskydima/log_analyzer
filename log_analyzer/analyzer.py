@@ -1,5 +1,5 @@
-from .models import LogStats
-from .models import LogRecord
+from log_analyzer.models import LogStats
+from log_analyzer.models import LogRecord
 from typing import Any, Generator
 from collections import defaultdict
 
@@ -19,7 +19,7 @@ def analyze(records: Generator[LogRecord, Any, None]):
     )
 
     return {
-        "error_by_status": error_by_status,
+        "errors_by_status": error_by_status,
         "top_ip_count": top_ip_count,
         "requests_per_hour": requests_per_hour,
     }
