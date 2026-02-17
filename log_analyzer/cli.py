@@ -1,5 +1,6 @@
 import argparse
 from .parser import parse_log
+from analyzer import analyze
 
 
 def main():
@@ -19,8 +20,8 @@ def main():
 
     args = parser.parse_args()
 
-    # execution
     records = parse_log(args.file)
+    sorted_stats = analyze(records)
 
 
 if __name__ == "__main__":
