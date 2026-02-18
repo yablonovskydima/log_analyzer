@@ -3,8 +3,14 @@ from log_analyzer.models import LogRecord
 from typing import Any, Generator
 from collections import defaultdict
 
-def analyze(records: Generator[LogRecord, Any, None]):
+def analyze(records: Generator[LogRecord, Any, None], from_date=None, to_date=None):
+    if from_date:
+        records = [r for r in records if r.timestamp >= from_date]
+    if to_date:
+        records = [r for r in records if r.timestamp <= to_date]
+
     stats = _count_stats(records)
+
     error_by_status = {
         s: c for s, c in stats.status_count.items() if s >= 400
     }
